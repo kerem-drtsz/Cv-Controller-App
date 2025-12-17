@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_nav"
+    app:startDestination="@id/homeFragment">
+
+    <!-- HOME -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="kerem.dertsiz.cvcontroller.ui.home.HomeFragment"
+        android:label="Home" />
+
+    <!-- RESULT -->
+    <fragment
+        android:id="@+id/resultFragment"
+        android:name="kerem.dertsiz.cvcontroller.ui.result.ResultFragment"
+        android:label="Result">
+        <argument
+            android:name="historyId"
+            app:argType="string" />
+    </fragment>
+
+    <!-- SETTINGS -->
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="kerem.dertsiz.cvcontroller.ui.settings.SettingsFragment"
+        android:label="Settings" />
+
+    <!-- HISTORY -->
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="kerem.dertsiz.cvcontroller.ui.history.HistoryFragment"
+        android:label="History" />
+
+</navigation>
