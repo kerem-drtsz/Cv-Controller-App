@@ -41,7 +41,7 @@ class JobOptimizeFragment : Fragment(R.layout.fragment_job_optimize) {
 
     private fun setupRecyclerView() {
         adapter = CvVersionAdapter { version ->
-            vm.downloadPdf(version.downloadUrl)
+            vm.downloadPdf(version)
         }
         b.rvCvVersions.layoutManager = LinearLayoutManager(requireContext())
         b.rvCvVersions.adapter = adapter

@@ -37,8 +37,20 @@ class ResultFragment : Fragment(R.layout.fragment_result) {
                 b.tvTitle.text = "Sonuç bulunamadı"
                 b.tvDetails.text = "Bu kayda ait analiz bulunamadı."
             } else {
-                b.tvTitle.text = item.resultSummary.ifBlank { "CV Analizi" }
-                b.tvDetails.text = item.resultDetails.ifBlank { "Detay bulunamadı." }
+                b.tvTitle.text = item.resultSummary.ifBlank { 
+                    if (item.type == kerem.dertsiz.cvcontroller.data.database.CvHistoryType.DOWNLOADED_CV.name) {
+                        "İndirilen CV"
+                    } else {
+                        "CV Analizi"
+                    }
+                }
+                
+                // Eğer indirilen CV ise, detayları göster
+                if (item.type == kerem.dertsiz.cvcontroller.data.database.CvHistoryType.DOWNLOADED_CV.name) {
+                    b.tvDetails.text = item.resultDetails.ifBlank { "Detay bulunamadı." }
+                } else {
+                    b.tvDetails.text = item.resultDetails.ifBlank { "Detay bulunamadı." }
+                }
             }
         }
     }

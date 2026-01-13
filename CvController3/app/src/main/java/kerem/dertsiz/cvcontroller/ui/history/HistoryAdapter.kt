@@ -33,7 +33,25 @@ class HistoryAdapter(
     inner class VH(private val b: ItemHistoryBinding) : RecyclerView.ViewHolder(b.root) {
         fun bind(item: CvHistoryEntity) {
             b.tvFileName.text = item.fileName
-            b.tvSummary.text = item.resultSummary
+            
+            // Tip'e göre özet göster
+            val summaryText = when (item.type ?: kerem.dertsiz.cvcontroller.data.database.CvHistoryType.ANALYSIS.name) {
+                kerem.dertsiz.cvcontroller.data.database.CvHistoryType.DOWNLOADED_CV.name -> {
+                    val levelText = when (item.cvLevel) {
+                        "simple" -> "Sade"
+                        "aggressive" -> "Gelişmiş"
+                        else -> item.cvLevel ?: ""
+                    }
+                    val langText = when (item.cvLanguage) {
+                        "tr" -> "Türkçe"
+                        "en" -> "English"
+                        else -> item.cvLanguage ?: ""
+                    }
+                    "📄 Optimize CV - $levelText ($langText)"
+                }
+                else -> item.resultSummary
+            }
+            b.tvSummary.text = summaryText
 
             val df = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale("tr"))
             b.tvDate.text = df.format(Date(item.createdAt))

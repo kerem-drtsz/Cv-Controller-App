@@ -27,6 +27,9 @@ class JobOptimizeViewModel(
     private val jobId: Int
 ) : ViewModel() {
 
+    private var currentJobTitle: String? = null
+    private var currentJobCompany: String? = null
+
     private val _uiState = MutableStateFlow<JobOptimizeState>(JobOptimizeState.Idle)
     val uiState: StateFlow<JobOptimizeState> = _uiState.asStateFlow()
 
@@ -39,6 +42,8 @@ class JobOptimizeViewModel(
             val jobs = result.getOrNull() ?: emptyList()
             val job = jobs.find { it.id == jobId }
             _jobInfo.value = job
+            currentJobTitle = job?.title
+            currentJobCompany = job?.company
         }
     }
 
@@ -57,18 +62,18 @@ class JobOptimizeViewModel(
         }
     }
 
-    fun downloadPdf(url: String) {
+    fun downloadPdf(version: kerem.dertsiz.cvcontroller.data.model.GeneratedCvVersion) = viewModelScope.launch {
         try {
             // URL relative path ise (örn: /static/...), base URL ile birleştir
-            val fullUrl = if (url.startsWith("http://") || url.startsWith("https://")) {
-                url
+            val fullUrl = if (version.downloadUrl.startsWith("http://") || version.downloadUrl.startsWith("https://")) {
+                version.downloadUrl
             } else {
                 // Relative path ise domain URL ile birleştir
                 val domainUrl = kerem.dertsiz.cvcontroller.data.remote.ApiClient.DOMAIN_URL
-                if (url.startsWith("/")) {
-                    "$domainUrl$url"
+                if (version.downloadUrl.startsWith("/")) {
+                    "$domainUrl${version.downloadUrl}"
                 } else {
-                    "$domainUrl/$url"
+                    "$domainUrl/${version.downloadUrl}"
                 }
             }
             
@@ -80,6 +85,16 @@ class JobOptimizeViewModel(
             )
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
             downloadManager.enqueue(request)
+            
+            // İndirilen CV'yi geçmişe kaydet
+            repository.saveDownloadedCv(
+                downloadUrl = fullUrl,
+                jobTitle = currentJobTitle,
+                jobCompany = currentJobCompany,
+                level = version.level,
+                language = version.language,
+                score = version.score
+            )
         } catch (e: Exception) {
             _uiState.value = JobOptimizeState.Error("PDF indirilemedi: ${e.message}")
         }

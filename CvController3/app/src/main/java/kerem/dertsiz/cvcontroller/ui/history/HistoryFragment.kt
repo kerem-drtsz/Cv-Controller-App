@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import kerem.dertsiz.cvcontroller.R
 import kerem.dertsiz.cvcontroller.data.database.AppDatabase
 import kerem.dertsiz.cvcontroller.databinding.FragmentHistoryBinding
@@ -38,13 +39,27 @@ class HistoryFragment : Fragment(R.layout.fragment_history) {
             }
         )
 
+        b.recyclerHistory.layoutManager = LinearLayoutManager(requireContext())
         b.recyclerHistory.adapter = adapter
 
         // Listeyi sürekli güncelle (Flow)
         viewLifecycleOwner.lifecycleScope.launch {
             dao.observeAll().collectLatest { list ->
-                b.tvEmpty.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
-                adapter.submitList(list)
+                android.util.Log.d("HistoryFragment", "History list size: ${list.size}")
+                list.forEachIndexed { index, item ->
+                    android.util.Log.d("HistoryFragment", "Item $index: ${item.fileName}, type: ${item.type}")
+                }
+                
+                if (list.isEmpty()) {
+                    b.tvEmpty.visibility = View.VISIBLE
+                    b.recyclerHistory.visibility = View.GONE
+                } else {
+                    b.tvEmpty.visibility = View.GONE
+                    b.recyclerHistory.visibility = View.VISIBLE
+                    adapter.submitList(list) {
+                        android.util.Log.d("HistoryFragment", "Adapter item count: ${adapter.itemCount}")
+                    }
+                }
             }
         }
     }

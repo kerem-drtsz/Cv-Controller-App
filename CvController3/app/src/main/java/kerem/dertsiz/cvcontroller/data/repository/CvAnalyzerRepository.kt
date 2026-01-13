@@ -135,7 +135,48 @@ class CvAnalyzerRepository(
                 analysis.weaknesses.forEach { append("• $it\n") }
                 append("\nÖneriler:\n")
                 analysis.recommendations.forEach { append("• $it\n") }
-            }
+            },
+            type = kerem.dertsiz.cvcontroller.data.database.CvHistoryType.ANALYSIS.name
+        )
+        historyDao.upsert(entity)
+        return historyId
+    }
+
+    suspend fun saveDownloadedCv(
+        downloadUrl: String,
+        jobTitle: String?,
+        jobCompany: String?,
+        level: String,
+        language: String,
+        score: Int
+    ): String {
+        val historyId = UUID.randomUUID().toString()
+        val levelText = when (level) {
+            "simple" -> "Sade"
+            "aggressive" -> "Gelişmiş"
+            else -> level.replaceFirstChar { it.uppercaseChar() }
+        }
+        val languageText = when (language) {
+            "tr" -> "Türkçe"
+            "en" -> "English"
+            else -> language.uppercase()
+        }
+        val fileName = "CV_${levelText}_${languageText}_${System.currentTimeMillis()}.pdf"
+        
+        val entity = CvHistoryEntity(
+            id = historyId,
+            fileName = fileName,
+            fileUri = downloadUrl,
+            createdAt = System.currentTimeMillis(),
+            resultSummary = "${jobTitle ?: "İş İlanı"} - ${jobCompany ?: ""} (${levelText}, ${languageText})",
+            resultDetails = "Optimize edilmiş CV\n\nİş: ${jobTitle ?: "Bilinmiyor"}\nŞirket: ${jobCompany ?: "Bilinmiyor"}\nSeviye: $levelText\nDil: $languageText\nSkor: $score/100",
+            type = kerem.dertsiz.cvcontroller.data.database.CvHistoryType.DOWNLOADED_CV.name,
+            downloadUrl = downloadUrl,
+            jobTitle = jobTitle,
+            jobCompany = jobCompany,
+            cvLevel = level,
+            cvLanguage = language,
+            cvScore = score
         )
         historyDao.upsert(entity)
         return historyId
