@@ -95,6 +95,7 @@
             android:layout_height="wrap_content"
             app:cardCornerRadius="16dp"
             app:cardElevation="2dp"
+            android:visibility="gone"
             app:cardBackgroundColor="?attr/colorSurface"
             app:strokeWidth="0dp"
             android:layout_marginBottom="16dp">
@@ -153,7 +154,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/turkish"
                     android:textSize="14sp"
-                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:textColor="@color/light_on_primary"
+                    android:backgroundTint="@color/light_primary"
                     app:cornerRadius="12dp"
                     android:layout_marginBottom="8dp"/>
 
@@ -163,7 +165,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/english"
                     android:textSize="14sp"
-                    style="@style/Widget.Material3.Button.OutlinedButton"
+                    android:textColor="@color/light_on_primary"
+                    android:backgroundTint="@color/light_primary"
                     app:cornerRadius="12dp"/>
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

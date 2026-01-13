@@ -130,26 +130,14 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
     }
     
     private fun updateLanguageButtons(selectedLanguage: String) {
-        val primaryColor = ContextCompat.getColor(requireContext(), R.color.light_primary)
-        val onPrimaryColor = ContextCompat.getColor(requireContext(), R.color.light_on_primary)
+        // Her iki buton da her zaman siyah arka plan ve beyaz text
+        val primaryColorStateList = ContextCompat.getColorStateList(requireContext(), R.color.light_primary)
+        val onPrimaryColorStateList = ContextCompat.getColorStateList(requireContext(), R.color.light_on_primary)
         
-        // Tüm butonları normal duruma getir (outlined button)
-        b.btnLanguageTurkish.backgroundTintList = null
-        b.btnLanguageEnglish.backgroundTintList = null
-        b.btnLanguageTurkish.setTextColor(primaryColor)
-        b.btnLanguageEnglish.setTextColor(primaryColor)
-        
-        // Seçili dili vurgula
-        when (selectedLanguage) {
-            "tr" -> {
-                b.btnLanguageTurkish.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.light_primary)
-                b.btnLanguageTurkish.setTextColor(onPrimaryColor)
-            }
-            "en" -> {
-                b.btnLanguageEnglish.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.light_primary)
-                b.btnLanguageEnglish.setTextColor(onPrimaryColor)
-            }
-        }
+        b.btnLanguageTurkish.backgroundTintList = primaryColorStateList
+        b.btnLanguageEnglish.backgroundTintList = primaryColorStateList
+        b.btnLanguageTurkish.setTextColor(onPrimaryColorStateList)
+        b.btnLanguageEnglish.setTextColor(onPrimaryColorStateList)
     }
     
     private fun setAppLanguage(language: String) {
