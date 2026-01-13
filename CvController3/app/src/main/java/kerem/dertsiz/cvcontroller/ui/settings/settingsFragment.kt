@@ -5,6 +5,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -47,6 +49,14 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             if (photo.isNotEmpty()) {
                 b.ivProfile.setImageURI(Uri.parse(photo))
             }
+
+            // Theme ayarını yükle
+            val themeMode = prefs.getThemeMode()
+            b.switchTheme.isChecked = themeMode == "dark"
+            
+            // Dil ayarını yükle
+            val currentLanguage = prefs.getLanguage()
+            updateLanguageButtons(currentLanguage)
         }
 
         b.ivProfile.setOnClickListener {
@@ -64,6 +74,52 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
             }
         }
 
+        b.switchTheme.setOnCheckedChangeListener { _, isChecked ->
+            lifecycleScope.launch {
+                val currentTheme = prefs.getThemeMode()
+                val newThemeMode = if (isChecked) "dark" else "light"
+                
+                // Sadece tema gerçekten değiştiyse güncelle
+                if (currentTheme != newThemeMode) {
+                    prefs.saveThemeMode(newThemeMode)
+                    
+                    // Tema değişikliğini uygula
+                    if (isChecked) {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    } else {
+                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    }
+                    
+                    // Activity'yi yeniden başlat ki tüm UI güncellensin
+                    requireActivity().recreate()
+                }
+            }
+        }
+
+        b.btnLanguageTurkish.setOnClickListener {
+            lifecycleScope.launch {
+                val currentLanguage = prefs.getLanguage()
+                if (currentLanguage != "tr") {
+                    prefs.saveLanguage("tr")
+                    updateLanguageButtons("tr")
+                    // Dil değişikliğini uygula - sadece bir kez recreate çağır
+                    setAppLanguage("tr")
+                }
+            }
+        }
+
+        b.btnLanguageEnglish.setOnClickListener {
+            lifecycleScope.launch {
+                val currentLanguage = prefs.getLanguage()
+                if (currentLanguage != "en") {
+                    prefs.saveLanguage("en")
+                    updateLanguageButtons("en")
+                    // Dil değişikliğini uygula - sadece bir kez recreate çağır
+                    setAppLanguage("en")
+                }
+            }
+        }
+
         b.btnLogout.setOnClickListener {
             lifecycleScope.launch {
                 prefs.logout()
@@ -71,6 +127,35 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                 requireActivity().finish()
             }
         }
+    }
+    
+    private fun updateLanguageButtons(selectedLanguage: String) {
+        val primaryColor = ContextCompat.getColor(requireContext(), R.color.light_primary)
+        val onPrimaryColor = ContextCompat.getColor(requireContext(), R.color.light_on_primary)
+        
+        // Tüm butonları normal duruma getir (outlined button)
+        b.btnLanguageTurkish.backgroundTintList = null
+        b.btnLanguageEnglish.backgroundTintList = null
+        b.btnLanguageTurkish.setTextColor(primaryColor)
+        b.btnLanguageEnglish.setTextColor(primaryColor)
+        
+        // Seçili dili vurgula
+        when (selectedLanguage) {
+            "tr" -> {
+                b.btnLanguageTurkish.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.light_primary)
+                b.btnLanguageTurkish.setTextColor(onPrimaryColor)
+            }
+            "en" -> {
+                b.btnLanguageEnglish.backgroundTintList = ContextCompat.getColorStateList(requireContext(), R.color.light_primary)
+                b.btnLanguageEnglish.setTextColor(onPrimaryColor)
+            }
+        }
+    }
+    
+    private fun setAppLanguage(language: String) {
+        // Sadece activity'yi yeniden başlat
+        // Locale MainActivity.attachBaseContext içinde ayarlanacak
+        requireActivity().recreate()
     }
 
     override fun onDestroyView() {

@@ -25,8 +25,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         val prefs = AppPrefs(requireContext())
 
         b.btnLogin.setOnClickListener {
-            val email = b.etEmail.text.toString().trim()
-            val password = b.etPassword.text.toString()
+            val email = b.tilEmail.editText?.text?.toString()?.trim() ?: ""
+            val password = b.tilPassword.editText?.text?.toString() ?: ""
 
             if (email.isEmpty() || password.isEmpty()) {
                 b.tvError.text = "Email ve şifre gir"

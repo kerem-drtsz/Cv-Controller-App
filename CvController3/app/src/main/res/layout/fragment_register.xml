@@ -1,88 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorBackground"
     android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="24dp"
         android:gravity="center_vertical">
 
-        <!-- Title -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Hesap Oluştur"
-            android:textSize="24sp"
+            android:textSize="32sp"
             android:textStyle="bold"
+            android:textColor="?attr/colorOnBackground"
             android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginBottom="40dp" />
 
-        <!-- Full Name -->
-        <EditText
-            android:id="@+id/etFullName"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ad Soyad"
-            android:inputType="textPersonName"
-            android:layout_marginBottom="12dp" />
+            app:boxCornerRadiusTopStart="16dp"
+            app:boxCornerRadiusTopEnd="16dp"
+            app:boxCornerRadiusBottomStart="16dp"
+            app:boxCornerRadiusBottomEnd="16dp"
+            app:boxBackgroundColor="?attr/colorSurface"
+            app:hintTextColor="?attr/colorOnSurfaceVariant"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_marginBottom="16dp">
 
-        <!-- Email -->
-        <EditText
-            android:id="@+id/etEmail"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etFullName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:textColor="?attr/colorOnSurface"
+                android:textColorHint="?attr/colorOnSurfaceVariant" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="E-posta"
-            android:inputType="textEmailAddress"
-            android:layout_marginBottom="12dp" />
+            app:boxCornerRadiusTopStart="16dp"
+            app:boxCornerRadiusTopEnd="16dp"
+            app:boxCornerRadiusBottomStart="16dp"
+            app:boxCornerRadiusBottomEnd="16dp"
+            app:boxBackgroundColor="?attr/colorSurface"
+            app:hintTextColor="?attr/colorOnSurfaceVariant"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_marginBottom="16dp">
 
-        <!-- Password -->
-        <EditText
-            android:id="@+id/etPassword"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:textColor="?attr/colorOnSurface"
+                android:textColorHint="?attr/colorOnSurfaceVariant" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Şifre"
-            android:inputType="textPassword"
-            android:layout_marginBottom="16dp" />
+            app:boxCornerRadiusTopStart="16dp"
+            app:boxCornerRadiusTopEnd="16dp"
+            app:boxCornerRadiusBottomStart="16dp"
+            app:boxCornerRadiusBottomEnd="16dp"
+            app:boxBackgroundColor="?attr/colorSurface"
+            app:hintTextColor="?attr/colorOnSurfaceVariant"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            app:endIconMode="password_toggle"
+            android:layout_marginBottom="24dp">
 
-        <!-- Register Button -->
-        <Button
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColor="?attr/colorOnSurface"
+                android:textColorHint="?attr/colorOnSurfaceVariant" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnRegister"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Kayıt Ol" />
+            android:layout_height="56dp"
+            android:text="Kayıt Ol"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:cornerRadius="16dp"
+            app:backgroundTint="?attr/colorPrimary"
+            app:strokeWidth="0dp"
+            android:layout_marginBottom="16dp"/>
 
-        <!-- Progress -->
         <ProgressBar
             android:id="@+id/progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:indeterminateTint="?attr/colorPrimary"
             android:visibility="gone"
             android:layout_gravity="center"
-            android:layout_marginTop="16dp" />
+            android:layout_marginBottom="16dp" />
 
-        <!-- Error Text -->
         <TextView
             android:id="@+id/tvError"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/holo_red_dark"
+            android:textColor="?attr/colorError"
+            android:textSize="14sp"
             android:visibility="gone"
-            android:layout_marginTop="12dp"
+            android:layout_marginBottom="16dp"
             android:layout_gravity="center_horizontal" />
 
-        <!-- Go to Login -->
-        <TextView
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/tvGoLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Zaten hesabın var mı? Giriş yap"
             android:textColor="?attr/colorPrimary"
-            android:layout_marginTop="24dp"
+            app:backgroundTint="@android:color/transparent"
+            app:strokeWidth="0dp"
+            style="@style/Widget.Material3.Button.TextButton"
             android:layout_gravity="center_horizontal" />
 
     </LinearLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

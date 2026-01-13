@@ -1,9 +1,87 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Base application theme - Dark Mode (Default) -->
     <style name="Base.Theme.CvController" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Dark Background -->
+        <item name="android:colorBackground">@color/dark_background</item>
+        <item name="colorBackground">@color/dark_background</item>
+        <item name="android:windowBackground">@color/dark_background</item>
+        
+        <!-- Primary Colors -->
+        <item name="colorPrimary">@color/dark_primary</item>
+        <item name="colorPrimaryVariant">@color/dark_primary_variant</item>
+        <item name="colorOnPrimary">@color/dark_on_primary</item>
+        
+        <!-- Secondary Colors -->
+        <item name="colorSecondary">@color/dark_secondary</item>
+        <item name="colorOnSecondary">@color/dark_on_primary</item>
+        
+        <!-- Surface Colors -->
+        <item name="colorSurface">@color/dark_surface</item>
+        <item name="colorSurfaceVariant">@color/dark_surface_variant</item>
+        <item name="colorOnSurface">@color/dark_on_surface</item>
+        <item name="colorOnBackground">@color/dark_on_background</item>
+        
+        <!-- Error Color -->
+        <item name="colorError">@color/dark_error</item>
+        <item name="colorOnError">@color/white</item>
+        
+        <!-- Status Bar -->
+        <item name="android:statusBarColor">@color/dark_background</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        
+        <!-- Navigation Bar -->
+        <item name="android:navigationBarColor">@color/dark_background</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o">false</item>
+    </style>
+
+    <!-- Light Theme -->
+    <style name="Theme.CvController.Light" parent="Theme.Material3.Light.NoActionBar">
+        <!-- Light Background -->
+        <item name="android:colorBackground">@color/light_background</item>
+        <item name="colorBackground">@color/light_background</item>
+        <item name="android:windowBackground">@color/light_background</item>
+        
+        <!-- Primary Colors - Siyah butonlar -->
+        <item name="colorPrimary">@color/light_primary</item>
+        <item name="colorPrimaryVariant">@color/light_primary_variant</item>
+        <item name="colorOnPrimary">@color/light_on_primary</item>
+        
+        <!-- Secondary Colors -->
+        <item name="colorSecondary">@color/light_secondary</item>
+        <item name="colorOnSecondary">@color/light_on_primary</item>
+        
+        <!-- Surface Colors - Gri kartlar -->
+        <item name="colorSurface">@color/light_card</item>
+        <item name="colorSurfaceVariant">@color/light_surface_variant</item>
+        <item name="colorOnSurface">@color/light_on_surface</item>
+        <item name="colorOnBackground">@color/light_on_background</item>
+        
+        <!-- Error Color -->
+        <item name="colorError">@color/light_error</item>
+        <item name="colorOnError">@color/white</item>
+        
+        <!-- Status Bar -->
+        <item name="android:statusBarColor">@color/light_background</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        
+        <!-- Navigation Bar -->
+        <item name="android:navigationBarColor">@color/light_background</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o">true</item>
     </style>
 
     <style name="Theme.CvController" parent="Base.Theme.CvController" />
+    
+    <!-- Card Style -->
+    <style name="CardStyle">
+        <item name="android:background">@color/dark_card</item>
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">4dp</item>
+    </style>
+    
+    <!-- Button Style -->
+    <style name="ButtonStyle" parent="Widget.Material3.Button">
+        <item name="backgroundTint">@color/dark_primary</item>
+        <item name="android:textColor">@color/dark_on_primary</item>
+        <item name="cornerRadius">12dp</item>
+    </style>
 </resources>

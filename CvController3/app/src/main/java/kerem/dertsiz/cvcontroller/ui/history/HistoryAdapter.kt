@@ -1,10 +1,12 @@
 package kerem.dertsiz.cvcontroller.ui.history
 
+import android.content.res.Configuration
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import kerem.dertsiz.cvcontroller.R
 import kerem.dertsiz.cvcontroller.data.database.CvHistoryEntity
 import kerem.dertsiz.cvcontroller.databinding.ItemHistoryBinding
 import java.text.SimpleDateFormat
@@ -55,6 +57,16 @@ class HistoryAdapter(
 
             val df = SimpleDateFormat("dd.MM.yyyy HH:mm", Locale("tr"))
             b.tvDate.text = df.format(Date(item.createdAt))
+
+            // Tema göre trash icon'unu ayarla
+            val nightMode = b.root.context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+            if (nightMode == Configuration.UI_MODE_NIGHT_YES) {
+                // Dark theme - beyaz trash icon
+                b.btnDelete.setIconResource(R.drawable.trash_white)
+            } else {
+                // Light theme - kırmızı trash icon
+                b.btnDelete.setIconResource(R.drawable.trash)
+            }
 
             b.root.setOnClickListener { onClick(item) }
             b.btnDelete.setOnClickListener { onDelete(item) }

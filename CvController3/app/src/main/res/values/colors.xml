@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Dark Theme Colors - Koyu renkler -->
+    <color name="dark_background">#121212</color>
+    <color name="dark_surface">#1E1E1E</color>
+    <color name="dark_surface_variant">#2C2C2C</color>
+    <color name="dark_primary">#03DAC6</color>
+    <color name="dark_primary_variant">#018786</color>
+    <color name="dark_secondary">#03DAC6</color>
+    <color name="dark_on_background">#FFFFFF</color>
+    <color name="dark_on_surface">#E0E0E0</color>
+    <color name="dark_on_primary">#000000</color>
+    <color name="dark_error">#CF6679</color>
+    <color name="dark_success">#4CAF50</color>
+    <color name="dark_card">#1E1E1E</color>
+    <color name="dark_divider">#333333</color>
+    
+    <!-- Light Theme Colors - Gri kartlar, siyah butonlar, beyaz buton textleri -->
+    <color name="light_background">#FFFFFF</color>
+    <color name="light_surface">#F5F5F5</color>
+    <color name="light_surface_variant">#E0E0E0</color>
+    <color name="light_primary">#000000</color>
+    <color name="light_primary_variant">#212121</color>
+    <color name="light_secondary">#424242</color>
+    <color name="light_on_background">#000000</color>
+    <color name="light_on_surface">#000000</color>
+    <color name="light_on_primary">#FFFFFF</color>
+    <color name="light_error">#B00020</color>
+    <color name="light_success">#4CAF50</color>
+    <color name="light_card">#E0E0E0</color>
+    <color name="light_divider">#BDBDBD</color>
+    
+    <!-- Bottom Navigation Selected Background -->
+    <color name="bottom_nav_selected">#E0E0E0</color>
+    
+    <!-- Legacy colors -->
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
 </resources>

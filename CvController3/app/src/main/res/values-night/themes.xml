@@ -1,7 +1,36 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Dark theme (same as main theme since we want dark by default) -->
     <style name="Base.Theme.CvController" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <!-- Dark Background -->
+        <item name="android:colorBackground">@color/dark_background</item>
+        <item name="colorBackground">@color/dark_background</item>
+        <item name="android:windowBackground">@color/dark_background</item>
+        
+        <!-- Primary Colors -->
+        <item name="colorPrimary">@color/dark_primary</item>
+        <item name="colorPrimaryVariant">@color/dark_primary_variant</item>
+        <item name="colorOnPrimary">@color/dark_on_primary</item>
+        
+        <!-- Secondary Colors -->
+        <item name="colorSecondary">@color/dark_secondary</item>
+        <item name="colorOnSecondary">@color/dark_on_primary</item>
+        
+        <!-- Surface Colors -->
+        <item name="colorSurface">@color/dark_surface</item>
+        <item name="colorSurfaceVariant">@color/dark_surface_variant</item>
+        <item name="colorOnSurface">@color/dark_on_surface</item>
+        <item name="colorOnBackground">@color/dark_on_background</item>
+        
+        <!-- Error Color -->
+        <item name="colorError">@color/dark_error</item>
+        <item name="colorOnError">@color/white</item>
+        
+        <!-- Status Bar -->
+        <item name="android:statusBarColor">@color/dark_background</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+        
+        <!-- Navigation Bar -->
+        <item name="android:navigationBarColor">@color/dark_background</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="o">false</item>
     </style>
 </resources>

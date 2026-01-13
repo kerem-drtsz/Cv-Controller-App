@@ -22,6 +22,8 @@ class AppPrefs(private val context: Context) {
     private val KEY_PHOTO_URI  = stringPreferencesKey("photo_uri")
     private val KEY_USER_UUID = stringPreferencesKey("user_uuid")
     private val KEY_CV_ID = stringPreferencesKey("cv_id")
+    private val KEY_THEME_MODE = stringPreferencesKey("theme_mode") // "light", "dark", "system"
+    private val KEY_LANGUAGE = stringPreferencesKey("language") // "tr", "en", "system"
 
     val firstName = context.dataStore.data.map { it[KEY_FIRST_NAME] ?: "" }
     val lastName  = context.dataStore.data.map { it[KEY_LAST_NAME] ?: "" }
@@ -95,4 +97,28 @@ class AppPrefs(private val context: Context) {
             it.remove(KEY_CV_ID)
         }
     }
+
+    suspend fun saveThemeMode(mode: String) {
+        context.dataStore.edit {
+            it[KEY_THEME_MODE] = mode
+        }
+    }
+
+    suspend fun getThemeMode(): String {
+        return context.dataStore.data.map { it[KEY_THEME_MODE] ?: "system" }.first()
+    }
+
+    val themeMode: Flow<String> = context.dataStore.data.map { it[KEY_THEME_MODE] ?: "system" }
+
+    suspend fun saveLanguage(language: String) {
+        context.dataStore.edit {
+            it[KEY_LANGUAGE] = language
+        }
+    }
+
+    suspend fun getLanguage(): String {
+        return context.dataStore.data.map { it[KEY_LANGUAGE] ?: "system" }.first()
+    }
+
+    val language: Flow<String> = context.dataStore.data.map { it[KEY_LANGUAGE] ?: "system" }
 }
