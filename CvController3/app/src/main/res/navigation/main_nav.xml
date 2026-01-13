@@ -32,4 +32,24 @@
         android:name="kerem.dertsiz.cvcontroller.ui.history.HistoryFragment"
         android:label="History" />
 
+    <!-- JOB LISTINGS -->
+    <fragment
+        android:id="@+id/jobListingsFragment"
+        android:name="kerem.dertsiz.cvcontroller.ui.jobs.JobListingsFragment"
+        android:label="İş İlanları">
+        <action
+            android:id="@+id/action_jobListingsFragment_to_jobOptimizeFragment"
+            app:destination="@id/jobOptimizeFragment" />
+    </fragment>
+
+    <!-- JOB OPTIMIZE -->
+    <fragment
+        android:id="@+id/jobOptimizeFragment"
+        android:name="kerem.dertsiz.cvcontroller.ui.jobs.JobOptimizeFragment"
+        android:label="CV Optimize Et">
+        <argument
+            android:name="jobId"
+            app:argType="integer" />
+    </fragment>
+
 </navigation>

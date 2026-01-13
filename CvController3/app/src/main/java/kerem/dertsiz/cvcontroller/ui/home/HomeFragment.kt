@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import kerem.dertsiz.cvcontroller.R
 import kerem.dertsiz.cvcontroller.databinding.FragmentHomeBinding
@@ -17,7 +18,9 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private var _b: FragmentHomeBinding? = null
     private val b get() = _b!!
-    private val vm: CvAnalyzeViewModel by viewModels()
+    private val vm: CvAnalyzeViewModel by viewModels {
+        CvAnalyzeViewModelFactory(requireContext())
+    }
 
     private val pickDoc = registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
         if (uri != null) {
@@ -36,6 +39,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         b.btnSettings.setOnClickListener {
             findNavController().navigate(R.id.settingsFragment)
+        }
+
+        b.btnJobListings.setOnClickListener {
+            findNavController().navigate(R.id.jobListingsFragment)
         }
 
         fun startPick() {

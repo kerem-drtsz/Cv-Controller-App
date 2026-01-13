@@ -55,6 +55,18 @@
         app:layout_constraintTop_toBottomOf="@id/uploadCard"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"/>
+        android:layout_marginTop="12dp"
+        android:layout_marginHorizontal="16dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnJobListings"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="İş İlanlarını Görüntüle"
+        android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tvInfo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

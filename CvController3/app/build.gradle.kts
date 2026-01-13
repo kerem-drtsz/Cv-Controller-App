@@ -60,10 +60,19 @@ dependencies {
     implementation("androidx.viewpager2:viewpager2:1.1.0")
     implementation("com.tbuonomo:dotsindicator:5.1.0")
 
+    // RecyclerView
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
+
     // Room
     implementation("androidx.room:room-runtime:2.6.1")
     implementation("androidx.room:room-ktx:2.6.1")
     kapt("androidx.room:room-compiler:2.6.1")
+
+    // Retrofit & Networking
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
